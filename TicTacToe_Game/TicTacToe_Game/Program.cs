@@ -97,7 +97,7 @@ namespace TicTacToe_Game
                 (b[2] == ch && b[5] == ch && b[8] == ch) ||
                 (b[3] == ch && b[6] == ch && b[9] == ch) ||
                 (b[1] == ch && b[5] == ch && b[9] == ch) ||
-                (b[7] == ch && b[5] == ch && b[3] == ch) );
+                (b[7] == ch && b[5] == ch && b[3] == ch));
         }
     }
 }
