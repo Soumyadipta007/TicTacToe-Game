@@ -12,7 +12,7 @@ namespace TicTacToe_Game
             Player player = new Player("Player", symbolForPlayer);
             char symbolForComputer;
             if (symbolForPlayer == 'X')
-                symbolForComputer = '0';
+                symbolForComputer = 'O';
             else
                 symbolForComputer = 'X';
             Player computer = new Player("Computer", symbolForComputer);
@@ -31,10 +31,18 @@ namespace TicTacToe_Game
             char symbol;
             while (true)
             {
-                Console.WriteLine("Enter Symbol X or 0 for "+name);
+                Console.WriteLine("Enter Symbol X or O for "+name);
                 symbol = Console.ReadLine()[0];
-                if (symbol == 'X' || symbol == '0')
+                symbol = char.ToUpper(symbol);
+                if (symbol == 'X' || symbol == 'O')
+                {
                     break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Input");
+                }
+
             }
             return symbol;
         }
