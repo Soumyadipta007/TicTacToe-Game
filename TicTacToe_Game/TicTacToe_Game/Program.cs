@@ -5,17 +5,15 @@ namespace TicTacToe_Game
 {
     class Program
     {
+        private static char symbolForPlayer;
+        private static char symbolForComputer;
         static void Main(string[] args)
         {
             char[] board = createBoard();
-            char symbolForPlayer = chooseXor0("Player");
+            chooseXor0ForPlayer();
             Player player = new Player("Player", symbolForPlayer);
-            char symbolForComputer;
-            if (symbolForPlayer == 'X')
-                symbolForComputer = 'O';
-            else
-                symbolForComputer = 'X';
             Player computer = new Player("Computer", symbolForComputer);
+            showBoard(board);
         }
         private static char[] createBoard()
         {
@@ -26,15 +24,14 @@ namespace TicTacToe_Game
             }
             return board;
         }
-        private static char chooseXor0(string name)
+        private static void chooseXor0ForPlayer()
         {
-            char symbol;
             while (true)
             {
-                Console.WriteLine("Enter Symbol X or O for "+name);
-                symbol = Console.ReadLine()[0];
-                symbol = char.ToUpper(symbol);
-                if (symbol == 'X' || symbol == 'O')
+                Console.WriteLine("Enter Symbol X or O for Player");
+                symbolForPlayer = Console.ReadLine()[0];
+                symbolForPlayer = char.ToUpper(symbolForPlayer);
+                if (symbolForPlayer == 'X' || symbolForPlayer == 'O')
                 {
                     break;
                 }
@@ -44,7 +41,23 @@ namespace TicTacToe_Game
                 }
 
             }
-            return symbol;
+            if (symbolForPlayer == 'X')
+                symbolForComputer = 'O';
+            else
+                symbolForComputer = 'X';
+        }
+        private static void showBoard(char[] board)
+        {
+            int columnSize = 3;
+            for(int i = 1; i < board.Length; i+=3)
+            {
+                for(int j = 1; j <= columnSize; j++)
+                {
+                    Console.Write("| " + board[i] + "| ");
+                }
+
+                Console.WriteLine();
+            }
         }
     }
 }
