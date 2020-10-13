@@ -14,6 +14,7 @@ namespace TicTacToe_Game
             Player player = new Player("Player", symbolForPlayer);
             Player computer = new Player("Computer", symbolForComputer);
             showBoard(board);
+            board = checkBoard(board,symbolForPlayer);
         }
         private static char[] createBoard()
         {
@@ -47,17 +48,31 @@ namespace TicTacToe_Game
                 symbolForComputer = 'X';
         }
         private static void showBoard(char[] board)
+        {            
+            Console.WriteLine("|"+board[1]+"|"+ board[2] + "|"+ board[3] + "|");
+            Console.WriteLine("-------");
+            Console.WriteLine("|" + board[4] + "|" + board[5] + "|" + board[6] + "|");
+            Console.WriteLine("-------");
+            Console.WriteLine("|" + board[7] + "|" + board[8] + "|" + board[9] + "|");            
+        }
+        private static char[] checkBoard(char[] board,char symbol)
         {
-            int columnSize = 3;
-            for(int i = 1; i < board.Length; i+=3)
-            {
-                for(int j = 1; j <= columnSize; j++)
-                {
-                    Console.Write("| " + board[i] + "| ");
-                }
 
-                Console.WriteLine();
+            while (true)
+            {
+                Console.WriteLine("Enter index");
+                int index = Convert.ToInt32(Console.ReadLine());
+                if (board[index] == ' ')
+                {
+                    board[index] = symbol;
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Index is not free");
+                }
             }
+            return board;
         }
     }
 }
