@@ -30,7 +30,7 @@ namespace TicTacToe_Game
         {
             while (true)
             {
-                Console.WriteLine("Enter Symbol X or O for Player.");
+                Console.WriteLine("Enter Symbol X or O for Player..");
                 symbolForPlayer = Console.ReadLine()[0];
                 symbolForPlayer = char.ToUpper(symbolForPlayer);
                 if (symbolForPlayer == 'X' || symbolForPlayer == 'O')
