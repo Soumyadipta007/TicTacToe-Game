@@ -15,6 +15,7 @@ namespace TicTacToe_Game
             Player computer = new Player("Computer", symbolForComputer);
             showBoard(board);
             board = checkBoard(board,symbolForPlayer);
+            showBoard(board);
         }
         private static char[] createBoard()
         {
@@ -29,7 +30,7 @@ namespace TicTacToe_Game
         {
             while (true)
             {
-                Console.WriteLine("Enter Symbol X or O for Player");
+                Console.WriteLine("Enter Symbol X or O for Player.");
                 symbolForPlayer = Console.ReadLine()[0];
                 symbolForPlayer = char.ToUpper(symbolForPlayer);
                 if (symbolForPlayer == 'X' || symbolForPlayer == 'O')
