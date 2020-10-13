@@ -21,7 +21,8 @@ namespace TicTacToe_Game
             string whoStarts=checkWhoStarts(player.name,computer.name);
             Console.WriteLine(whoStarts + " starts the game");
             Console.WriteLine("Check if won " + isWinner(board, symbolForPlayer));
-            int computerMove = getComputerMove(board, symbolForComputer);
+            int computerMove = getComputerMove(board, symbolForComputer,symbolForPlayer);
+        
         }
         private static char[] createBoard()
         {
@@ -101,13 +102,15 @@ namespace TicTacToe_Game
                 (b[1] == ch && b[5] == ch && b[9] == ch) ||
                 (b[7] == ch && b[5] == ch && b[3] == ch));
         }
-        private static int getComputerMove(char[] board,char compLetter)
+        private static int getComputerMove(char[] board,char compLetter,char playerletter)
         {
-            int winMove = getWinningMove(board, compLetter);
-            if (winMove != 0)
-                return winMove;
-            else
-                return 0;
+            int compwinMove = getWinningMove(board, compLetter);
+            if (compwinMove != 0)
+                return compwinMove;
+            int playerwinMove = getWinningMove(board, playerletter);
+            if (playerwinMove != 0)
+                return playerwinMove;
+            return 0;
         }
         private static int getWinningMove(char[] board, char letter)
         {
