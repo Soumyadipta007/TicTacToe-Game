@@ -7,6 +7,8 @@ namespace TicTacToe_Game
     {
         private static char symbolForPlayer;
         private static char symbolForComputer;
+        const int HEADS = 0;
+        const int TAILS = 1;
         static void Main(string[] args)
         {
             char[] board = createBoard();
@@ -16,6 +18,7 @@ namespace TicTacToe_Game
             showBoard(board);
             board = checkBoard(board,symbolForPlayer);
             showBoard(board);
+            string whoStarts=checkWhoStarts();
         }
         private static char[] createBoard()
         {
@@ -74,6 +77,15 @@ namespace TicTacToe_Game
                 }
             }
             return board;
+        }
+        private static string checkWhoStarts()
+        {
+            Random random = new Random();
+            int toss = random.Next(0, 2);
+            if (toss == HEADS)
+                return "Player";
+            else
+                return "Computer";
         }
     }
 }
