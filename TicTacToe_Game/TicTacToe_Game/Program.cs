@@ -19,6 +19,7 @@ namespace TicTacToe_Game
             showBoard(board);
             string whoStarts=checkWhoStarts(player.name,computer.name);
             Console.WriteLine(whoStarts + " starts the game");
+            Console.WriteLine("Check if won " + isWinner(board, symbolForPlayer));
         }
         private static char[] createBoard()
         {
@@ -86,6 +87,17 @@ namespace TicTacToe_Game
                 return player;
             else
                 return computer;
+        }
+        private static bool isWinner(char[] b,char ch)
+        {
+            return ((b[1] == ch && b[2] == ch && b[3] == ch) ||
+                (b[4] == ch && b[5] == ch && b[6] == ch) ||
+                (b[7] == ch && b[8] == ch && b[9] == ch) ||
+                (b[1] == ch && b[4] == ch && b[7] == ch) ||
+                (b[2] == ch && b[5] == ch && b[8] == ch) ||
+                (b[3] == ch && b[6] == ch && b[9] == ch) ||
+                (b[1] == ch && b[5] == ch && b[9] == ch) ||
+                (b[7] == ch && b[5] == ch && b[3] == ch) );
         }
     }
 }
