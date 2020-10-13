@@ -62,7 +62,7 @@ namespace TicTacToe_Game
             {
                 Console.WriteLine("Enter index");
                 int index = Convert.ToInt32(Console.ReadLine());
-                if (board[index] == ' ')
+                if (board[index] == ' ' && index>=1 && index<=9)
                 {
                     board[index] = symbol;
                     break;
