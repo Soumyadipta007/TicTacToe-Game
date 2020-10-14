@@ -9,6 +9,7 @@ namespace TicTacToe_Game
         private static char symbolForPlayer;
         private static char symbolForComputer;
         const int HEADS = 0;
+        public enum GameStatus { WON, FULL_BOARD, CONTINUE};
         static void Main(string[] args)
         {
             char[] board = createBoard();
@@ -16,13 +17,65 @@ namespace TicTacToe_Game
             Player player = new Player("Player", symbolForPlayer);
             Player computer = new Player("Computer", symbolForComputer);
             showBoard(board);
-            board = checkBoard(board,symbolForPlayer);
+            int index = checkBoard(board);
+            board[index] = symbolForPlayer;
             showBoard(board);
             string whoStarts=checkWhoStarts(player.name,computer.name);
             Console.WriteLine(whoStarts + " starts the game");
             Console.WriteLine("Check if won " + isWinner(board, symbolForPlayer));
             int computerMove = getComputerMove(board, symbolForComputer,symbolForPlayer);
-        
+            bool gamePlay = true;
+            string currentPlayer = whoStarts;
+            GameStatus gameStatus;
+            while (gamePlay)
+            {
+                if (currentPlayer.Equals(player.name))
+                {
+                    showBoard(board);
+                    int playerMove = checkBoard(board);
+                    string winMessage = "You Won!";
+                    gameStatus = getGameStatus(board, playerMove, symbolForPlayer, winMessage);
+                    currentPlayer = computer.name;
+                }
+                else
+                {
+                    string winMessage = "Computer Won!";
+                    int compMove = getComputerMove(board, symbolForComputer, symbolForPlayer);
+                    gameStatus = getGameStatus(board, compMove, symbolForComputer, winMessage);
+                    currentPlayer = player.name;
+                }
+                if (gameStatus.Equals(GameStatus.CONTINUE))
+                    continue;
+                gamePlay = false;
+            }        
+        }
+        private static GameStatus getGameStatus(char[] board,int move,char letter,string winMessage)
+        {
+            bool free = isSpaceFree(board, move);
+            if (free)
+                board[move] = letter;
+            if (isWinner(board, letter))
+            {
+                showBoard(board);
+                Console.WriteLine(winMessage);
+                return GameStatus.WON;
+            }
+            if(isBoardFull(board))
+            {
+                showBoard(board);
+                Console.WriteLine("Game is Tie");
+                return GameStatus.FULL_BOARD;
+            }
+            return GameStatus.CONTINUE;
+        }
+        private static bool isBoardFull(char[] board)
+        {
+            for(int index = 1; index < board.Length; index++)
+            {
+                if (isSpaceFree(board, index))
+                    return false;
+            }
+            return true;
         }
         private static char[] createBoard()
         {
@@ -63,16 +116,15 @@ namespace TicTacToe_Game
             Console.WriteLine("-------");
             Console.WriteLine("|" + board[7] + "|" + board[8] + "|" + board[9] + "|");            
         }
-        private static char[] checkBoard(char[] board,char symbol)
+        private static int checkBoard(char[] board)
         {
-
+            int index;
             while (true)
             {
                 Console.WriteLine("Enter index");
-                int index = Convert.ToInt32(Console.ReadLine());
+                index = Convert.ToInt32(Console.ReadLine());
                 if (board[index] == ' ' && index>=1 && index<=9)
-                {
-                    board[index] = symbol;
+                {               
                     break;
                 }
                 else
@@ -80,7 +132,7 @@ namespace TicTacToe_Game
                     Console.WriteLine("Index is not free");
                 }
             }
-            return board;
+            return index;
         }
         private static string checkWhoStarts(string player,string computer)
         {
