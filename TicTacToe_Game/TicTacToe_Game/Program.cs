@@ -46,7 +46,11 @@ namespace TicTacToe_Game
                 }
                 if (gameStatus.Equals(GameStatus.CONTINUE))
                     continue;
-                gamePlay = false;
+                gamePlay = playAgain();
+                if (gamePlay)
+                {
+                    board = createBoard();
+                }
             }        
         }
         private static GameStatus getGameStatus(char[] board,int move,char letter,string winMessage)
@@ -206,6 +210,15 @@ namespace TicTacToe_Game
                     return moves[index];
             }
             return 0;
+        }
+        private static bool playAgain()
+        {
+            Console.WriteLine("Enter y to play again else n");
+            string option = Console.ReadLine().ToLower();
+            if (option.Equals("y"))
+                return true;
+            else
+                return false;
         }
     }    
 }
