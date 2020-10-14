@@ -114,6 +114,12 @@ namespace TicTacToe_Game
             int computerMove = getRandomMoveFromList(board, cornorMoves);
             if (computerMove != 0)
                 return computerMove;
+            if (isSpaceFree(board, 5))
+                return 5;
+            int[] sideMoves = { 2, 4, 6, 8 };
+            computerMove = getRandomMoveFromList(board, sideMoves);
+            if (computerMove != 0)
+                return computerMove;
             return 0;
         }
         private static int getWinningMove(char[] board, char letter)
